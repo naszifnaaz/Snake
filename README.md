@@ -5,4 +5,5 @@ This is my attempt at coding the classic snake game we all know and love using p
 
 ## Instructions
 . This program require pygame
+
 . Run snake.py to play
