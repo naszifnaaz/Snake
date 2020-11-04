@@ -10,20 +10,44 @@ BLACK = (0,0,0)
 WHITE = (255,255,255)
 RED = (255,0,0)
 
+WIDTH = 500
+HEIGHT = 500
+
+COLS = 25
+ROWS = 20
+
 #Cube Class
 class cube(object):
     rows = 0
     width = 0
 
     def __init__(self, start, dirnx = 1, dirny = 0, color = RED):
-        pass
+        self.pos = start
+        self.dirnx = 1
+        self.dirny = 0
+        self.color = color
+
     
     def move(self, dirnx, dirny):
-        pass
+        self.dirnx = dirnx
+        self.dirny = dirny
+        self.pos = (self.pos[0] + self.dirnx, self.pos[1] + self.dirny)
     
-    def draw(Self, surface, eyes = False):
-        pass
+    def draw(self, surface, eyes = False):
+        dis = self.width // self.rows
+        i = self.pos[0]
+        j = self.pos[1]
 
+        pygame.draw.rect(surface, self.color, (i*dis+1,j*dis+1, dis-2, dis-2))
+
+        #Drawing eyes
+        if eyes:
+            centre = dis//2
+            radius = 3
+            circleMiddle = (i*dis+centre-radius,j*dis+8)
+            circleMiddle2 = (i*dis + dis -radius*2, j*dis+8)
+            pygame.draw.circle(surface, BLACK, circleMiddle, radius)
+            pygame.draw.circle(surface, BLACK, circleMiddle2, radius)
 
 #Snake class
 class snake(object):
@@ -39,7 +63,7 @@ class snake(object):
         self.dirny = 1
     
     def move(self):
-        for event in pygame.eveny,get():
+        for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
             
