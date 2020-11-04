@@ -28,11 +28,46 @@ class cube(object):
 #Snake class
 class snake(object):
 
+    body = []
+    turns = []
+
     def __init__(self, color, pos):
-        pass
+        self.color = color
+        self.head = cube(pos)
+        self.body.append(self.head)
+        self.dirnx = 0
+        self.dirny = 1
     
     def move(self):
-        pass
+        for event in pygame.eveny,get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            
+            keys = pygame.key.get_pressed()
+
+            for key in keys:
+                if keys[pygame.K_LEFT]:
+                    self.dirnx = -1
+                    self.dirny = 0
+                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+
+                elif keys[pygame.K_RIGHT]:
+                    self.dirnx = 1
+                    self.dirny = 0
+                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+
+                elif keys[pygame.K_UP]:
+                    self.dirnx = 0
+                    self.dirny = -1
+                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+
+                elif keys[pygame.K_DOWN]:
+                    self.dirnx = 0
+                    self.dirny = 1
+                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+
+        for i,c in enumerate(self.body):
+            
 
     def reset(self, pos):
         pass
@@ -52,17 +87,15 @@ def draw_grid(width, rows, surface):
         x = x + gap
         y = y + gap
 
-        pygame.draw.line(surface, WHITE, (x, 0), (x, width))
-        pygame.draw.line(surface, WHITE, (0, y), (width, y))
+        pygame.draw.line(surface, BLACK, (x, 0), (x, width))
+        pygame.draw.line(surface, BLACK, (0, y), (width, y))
 
-    pass
 
 def redraw_window(surface):
     global rows, width
-    surface.fill(BLACK)
+    surface.fill(WHITE)
     draw_grid(width, rows, surface)
     pygame.display.update()
-    pass
 
 def snack(rows, items):
     pass
@@ -81,7 +114,6 @@ def main():
     s = snake(RED, (10,10))
     run = True
     
-
     while(run):
         pygame.time.delay(50)
         clock.tick(FPS)
