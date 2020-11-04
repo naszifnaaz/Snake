@@ -137,7 +137,7 @@ def redraw_window():
 
 def snack(rows, items):
     positions = item.body
-     while True:
+    while True:
         x = random.randrange(1,rows-1)
         y = random.randrange(1,rows-1)
         if len(list(filter(lambda z:z.pos == (x,y), positions))) > 0:
@@ -149,7 +149,7 @@ def snack(rows, items):
 
 def main():
     global s, snack, win
-    win = pygame.display.set_mode((width, width))
+    win = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("Snake")
     clock = pygame.time.Clock()
     FPS = 10
