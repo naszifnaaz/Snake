@@ -6,7 +6,7 @@ import random
 import tkinter as tk
 from tkinter import messagebox
 
-#Game Values
+#Game constants
 BLACK = (0,0,0)
 WHITE = (255,255,255)
 RED = (255,0,0)
@@ -14,7 +14,6 @@ GREEN = (0,255,0)
 
 width = 500
 height = 500
-
 cols = 25
 rows = 20
 
@@ -65,6 +64,7 @@ class snake():
         self.dirny = 1
     
     def move(self):
+        #key-mapping
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -96,13 +96,13 @@ class snake():
             p = c.pos[:]
             if p in self.turns:
                 turn = self.turns[p]
-                c.move(turn[0]. turn[1])
+                c.move(turn[0], turn[1])
                 if i == len(self.body) - 1:
                     self.turns.pop(p)
             else:
                 c.move(c.dirnx,c.dirny)
 
-
+    #Reset snake
     def reset(self, pos):
         self.head = cube(pos)
         self.body = []
@@ -111,6 +111,7 @@ class snake():
         self.dirnx = 0
         self.dirny = 1
     
+    #extend snake
     def addCube(self):
         tail = self.body[-1]
         dx, dy = tail.dirnx, tail.dirny
@@ -134,6 +135,7 @@ class snake():
             else:
                 c.draw(surface)
 
+#drawing grid
 def drawGrid(w, rows, surface):
     gap = w // rows
     
@@ -156,6 +158,7 @@ def redrawWindow():
     pygame.display.update()
     pass
 
+#random snack implementation
 def randomSnack(rows, item):
     positions = item.body
     while True:
@@ -179,6 +182,7 @@ def main():
     FPS = 10
     run = True
     
+    #game-loop
     while(run):
         pygame.time.delay(50)
         clock.tick(FPS)
@@ -190,7 +194,7 @@ def main():
 
         if s.body[0].pos == snack.pos:
             s.addCube()
-            snack = cube(snack(rows,s), color=(0,255,0))
+            snack = cube(randomSnack(rows,s), color= GREEN)
             
         for x in range(len(s.body)):
             if s.body[x].pos in list(map(lambda z:z.pos,s.body[x+1:])):
