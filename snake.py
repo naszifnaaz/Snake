@@ -17,14 +17,14 @@ COLS = 25
 ROWS = 20
 
 #Cube Class
-class cube(object):
+class cube():
     rows = 0
     width = 0
 
     def __init__(self, start, dirnx = 1, dirny = 0, color = RED):
         self.pos = start
-        self.dirnx = 1
-        self.dirny = 0
+        self.dirnx = dirnx
+        self.dirny = dirny
         self.color = color
 
     
@@ -98,12 +98,7 @@ class snake(object):
                 if i == len(self.body) - 1:
                     self.turns.pop(p)
             else:
-                #Checking if we are at the edge of the screen
-                if c.dirnx == -1 and c.pos[0] <= 0: c.pos = (c.rows-1, c.pos[1])
-                elif c.dirnx == 1 and c.pos[0] >= c.rows-1: c.pos = (0,c.pos[1])
-                elif c.dirny == 1 and c.pos[1] >= c.rows-1: c.pos = (c.pos[0], 0)
-                elif c.dirny == -1 and c.pos[1] <= 0: c.pos = (c.pos[0],c.rows-1)
-                else: c.move(c.dirnx,c.dirny)
+                c.move(c,dirnx,c.dirny)
 
 
     def reset(self, pos):
@@ -132,22 +127,28 @@ def draw_grid(width, rows, surface):
         pygame.draw.line(surface, BLACK, (0, y), (width, y))
 
 
-def redraw_window(surface):
-    global rows, width
-    surface.fill(WHITE)
-    draw_grid(width, rows, surface)
+def redraw_window():
+    global win
+    win.fill(WHITE)
+    draw_grid(WIDTH, ROWS, surface)
+    s.draw(win)
+    snak.draw(win)
     pygame.display.update()
 
 def snack(rows, items):
-    pass
-
-def message_box(subject, content):
-    pass
+    positions = item.body
+     while True:
+        x = random.randrange(1,rows-1)
+        y = random.randrange(1,rows-1)
+        if len(list(filter(lambda z:z.pos == (x,y), positions))) > 0:
+               continue
+        else:
+               break
+    retur (x, y)
+    
 
 def main():
-    global width, rows
-    width = 500
-    rows = 20
+    global s, snack, win
     win = pygame.display.set_mode((width, width))
     pygame.display.set_caption("Snake")
     clock = pygame.time.Clock()
@@ -158,6 +159,7 @@ def main():
     while(run):
         pygame.time.delay(50)
         clock.tick(FPS)
+        s.nove()
         redraw_window(win)
 
     pass
