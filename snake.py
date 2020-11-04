@@ -89,7 +89,11 @@ class snake(object):
         pass
     
     def draw(self, surface):
-        pass
+        for i,c in enumerate(self.body):
+            if i == 0:
+                c.draw(surface, True)
+            else:
+                c.draw(surface)
 
 def draw_grid(width, rows, surface):
     gap = width // rows
