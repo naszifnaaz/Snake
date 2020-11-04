@@ -10,6 +10,7 @@ from tkinter import messagebox
 BLACK = (0,0,0)
 WHITE = (255,255,255)
 RED = (255,0,0)
+GREEN = (0,255,0)
 
 width = 500
 height = 500
@@ -99,7 +100,7 @@ class snake():
                 if i == len(self.body) - 1:
                     self.turns.pop(p)
             else:
-                c.move(c,dirnx,c.dirny)
+                c.move(c.dirnx,c.dirny)
 
 
     def reset(self, pos):
@@ -155,7 +156,7 @@ def redrawWindow():
     pygame.display.update()
     pass
 
-def randomSnack(rows, items):
+def randomSnack(rows, item):
     positions = item.body
     while True:
         x = random.randrange(1,rows-1)
@@ -172,6 +173,8 @@ def main():
     win = pygame.display.set_mode((width, height))
     pygame.display.set_caption("Snake")
     s = snake(RED, (10,10))
+    s.addCube()
+    snack = cube(randomSnack(rows,s), color= GREEN)
     clock = pygame.time.Clock()
     FPS = 10
     run = True
@@ -194,6 +197,6 @@ def main():
                 print("Score:", len(s.body))
                 s.reset((10,10))
                 break
-        redraw_window(win)
+        redrawWindow()
 
 main()
